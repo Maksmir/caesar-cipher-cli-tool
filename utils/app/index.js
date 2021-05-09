@@ -14,23 +14,33 @@ const checkArg = (args, type) => {
   }
   return "file";
 };
+const check = (inputData, args, outputSource) => {
+  const outputData = caesar.caesar(
+    inputData,
+    Number(args.shift),
+    args.action
+  );
+  if (outputSource === "file") {
+    file.appendTo(args.output, outputData);
+  } else {
+    console.log(outputData);
+  }
+};
 
 const main = (args) => {
-    const inputSource = checkArg(args, "input");
-    const outputSource = checkArg(args, "output");
+  const inputSource = checkArg(args, "input");
+  const outputSource = checkArg(args, "output");
 
-    const inputData = inputSource === "file" ? file.read(args.input) : cons.readLine();
-    const outputData = caesar.caesar(
-        inputData,
-        Number(args.shift),
-        args.action
-    );
-    if (outputSource === "file") {
-        file.appendTo(args.output, outputData);
-    } else {
-        console.log(outputData);
+  if (inputSource === "file") {
+    const inputData = file.read(args.input);
+    check(inputData, args, outputSource);
+    process.exit(0);
+  } else {
+    while (true) {
+      const inputData = cons.readLine();
+      check(inputData, args, outputSource);
     }
-    if (inputSource === "file") process.exit(0);
+  }
 };
 
 module.exports.main = main;
