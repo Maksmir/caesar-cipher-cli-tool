@@ -12,8 +12,8 @@
   },
   "author": "https://github.com/Maksmir",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Maksmir/caesar-cipher-cli-tool/issues"
-  },
-  "homepage": "https://github.com/Maksmir/caesar-cipher-cli-tool#readme"
+  "dependencies": {
+    "commander": "^7.2.0",
+    "readline-sync": "^1.4.10"
+  }
 }
